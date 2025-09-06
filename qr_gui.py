@@ -9,6 +9,7 @@ from datetime import datetime
 class QRCodeGUI:
     
     def __init__(self, root):
+        # Initialize the QR Code Generator GUI application
         self.root = root
         self.root.title("QR Code Generator")
         self.root.geometry("800x800")
@@ -31,6 +32,7 @@ class QRCodeGUI:
         self.url_entry.focus()
     
     def setup_styles(self):
+        # Configure the visual styles and colors for the GUI
         style = ttk.Style()
         
         self.colors = {
@@ -44,7 +46,7 @@ class QRCodeGUI:
         self.root.configure(bg=self.colors['background'])
     
     def create_widgets(self):
-        
+        # Create and arrange all GUI widgets and components
         main_frame = ttk.Frame(self.root, padding="20")
         main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
         
@@ -117,6 +119,7 @@ class QRCodeGUI:
         status_bar.grid(row=3, column=0, columnspan=3, sticky=(tk.W, tk.E), pady=(10, 0))
     
     def show_placeholder(self):
+        # Display placeholder text in the QR code canvas area
         self.qr_canvas.delete("all")
         canvas_width = self.qr_canvas.winfo_reqwidth()
         canvas_height = self.qr_canvas.winfo_reqheight()
@@ -130,6 +133,7 @@ class QRCodeGUI:
         )
     
     def validate_url(self, url):
+        # Validate and format the input URL
         url = url.strip()
         if not url:
             return False, ""
@@ -143,6 +147,7 @@ class QRCodeGUI:
         return True, url
     
     def on_url_change(self, event=None):
+        # Update status bar when URL input changes
         url = self.url_var.get().strip()
         if url:
             self.status_var.set(f"Ready to generate QR code for: {url[:50]}{'...' if len(url) > 50 else ''}")
@@ -150,6 +155,7 @@ class QRCodeGUI:
             self.status_var.set("Ready - Enter a URL to generate QR code")
     
     def generate_qr_code(self, event=None):
+        # Generate and display QR code from the input URL
         url = self.url_var.get().strip()
         
         if not url:
@@ -207,6 +213,7 @@ class QRCodeGUI:
 
 
 def main():
+    # Main function to start the GUI application
     try:
         root = tk.Tk()
         
